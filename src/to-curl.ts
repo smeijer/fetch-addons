@@ -4,7 +4,7 @@ export async function toCurl(input: string | URL, init?: RequestInit): Promise<s
 export async function toCurl(request: Request): Promise<string>;
 
 export async function toCurl(input: RequestInfo | URL, init?: RequestInit) {
-	const request = getRequest(input, init);
+	const request = getRequest(input, init).clone();
 	const headers = Array.from(request.headers.entries());
 	const data = await request.text();
 

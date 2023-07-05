@@ -1,6 +1,6 @@
 {
 	"name": "fetch-addons",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "A collection of addons for the fetch API",
 	"license": "MIT",
 	"repository": "smeijer/fetch-addons",
