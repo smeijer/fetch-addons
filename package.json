@@ -1,6 +1,6 @@
 {
 	"name": "fetch-addons",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "A collection of addons for the fetch API",
 	"license": "MIT",
 	"repository": "smeijer/fetch-addons",
@@ -12,6 +12,7 @@
 	},
 	"type": "module",
 	"types": "./dist/index.d.ts",
+	"main": "./dist/index.js",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
