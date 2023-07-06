@@ -2,10 +2,10 @@ import { getRequest } from './request.js';
 
 export function deleteEmptyHeaders(headers: Headers) {
 	// Can't do it in the headers.forEach loop, see https://twitter.com/meijer_s/status/1676506116736397312
-	[...headers.entries()].forEach(([key, value]) => {
-		if (value && value !== 'undefined' && value !== 'null') return;
+	for (const [key, value] of [...headers]) {
+		if (value && value !== 'undefined' && value !== 'null') continue;
 		headers.delete(key);
-	});
+	}
 }
 
 export function getHeaders(headers: HeadersInit): Headers;
