@@ -1,6 +1,6 @@
 {
 	"name": "fetch-addons",
-	"version": "1.0.2",
+	"version": "1.1.0",
 	"description": "A collection of addons for the fetch API",
 	"license": "MIT",
 	"repository": "smeijer/fetch-addons",
@@ -12,14 +12,15 @@
 	},
 	"type": "module",
 	"types": "./dist/index.d.ts",
-	"main": "./dist/index.js",
+	"main": "./dist/index.cjs",
 	"exports": {
 		".": {
 			"types": "./dist/index.d.ts",
-			"default": "./dist/index.js"
+			"import": "./dist/index.js",
+			"require": "./dist/index.cjs"
 		},
 		"./*.js": {
-			"default": "./dist/*.js",
+			"import": "./dist/*.js",
 			"types": "./dist/*.d.ts"
 		}
 	},
@@ -28,7 +29,8 @@
 	},
 	"scripts": {
 		"test": "prettier -w . && eslint . --fix && jest",
-		"build": "rimraf ./dist && tsc -p tsconfig.build.json",
+		"build": "rimraf ./dist && tsc -p tsconfig.build.json && npm run build:cjs",
+		"build:cjs": "esbuild src/index.ts --bundle --outfile=dist/index.cjs --format=cjs --platform=node",
 		"prepare": "npm run build"
 	},
 	"files": [
@@ -48,6 +50,7 @@
 		"@smeijer/eslint-config": "^1.1.0",
 		"@smeijer/tsconfig": "^1.0.0",
 		"@types/jest": "^29.5.2",
+		"esbuild": "^0.18.11",
 		"jest": "^29.5.0",
 		"rimraf": "^5.0.1",
 		"ts-jest": "^29.1.1",
