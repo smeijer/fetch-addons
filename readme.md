@@ -25,8 +25,8 @@ import { toCurl } from 'fetch-addons';
 toCurl(input, init);
 toCurl(request);
 
-// curl --url https://example.com \
-//   --request POST \
+// curl --url 'https://example.com' \
+//   --request 'POST' \
 //   --header 'content-type: application/json' \
 //   --data '{"foo":"bar"}'`
 ```

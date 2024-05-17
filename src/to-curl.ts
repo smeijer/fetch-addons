@@ -10,7 +10,7 @@ export async function toCurl(input: RequestInfo | URL, init?: RequestInit) {
 
 	return [
 		`curl --url '${request.url}'`,
-		`--request ${request.method.toUpperCase()}`,
+		`--request '${request.method.toUpperCase()}'`,
 		...headers.map(([key, value]) => `--header '${key}: ${value}'`),
 		data && `--data '${data}'`,
 	]
