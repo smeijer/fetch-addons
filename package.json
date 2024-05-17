@@ -49,6 +49,7 @@
 	"devDependencies": {
 		"@smeijer/eslint-config": "^1.1.0",
 		"@smeijer/tsconfig": "^1.0.0",
+		"@types/node": "^18.19.33",
 		"esbuild": "^0.18.11",
 		"globstar": "^1.0.0",
 		"rimraf": "^5.0.1",
