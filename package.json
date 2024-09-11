@@ -10,28 +10,26 @@
 		"email": "stephan.meijer@gmail.com",
 		"url": "https://meijer.ws"
 	},
-	"type": "module",
-	"types": "./dist/index.d.ts",
-	"main": "./dist/index.cjs",
-	"exports": {
-		".": {
-			"types": "./dist/index.d.ts",
-			"import": "./dist/index.js",
-			"require": "./dist/index.cjs"
-		},
-		"./*.js": {
-			"import": "./dist/*.js",
-			"types": "./dist/*.d.ts"
+	"tshy": {
+		"project": "./tsconfig.build.json",
+		"exclude": [
+			"src/**/*.test.ts"
+		],
+		"exports": {
+			".": "./src/index.ts",
+			"./headers": "./src/headers.ts",
+			"./request": "./src/request.ts",
+			"./to-curl": "./src/to-curl.ts",
+			"./package.json": "./package.json"
 		}
 	},
+	"type": "module",
 	"engines": {
 		"node": ">=16"
 	},
 	"scripts": {
 		"test": "prettier -w . && eslint . --fix && globstar -- node --test --import tsx src/**.test.ts",
-		"build": "rimraf ./dist && tsc -p tsconfig.build.json && npm run build:cjs",
-		"build:cjs": "esbuild src/index.ts --bundle --outfile=dist/index.cjs --format=cjs --platform=node",
-		"prepare": "npm run build"
+		"build": "rimraf ./dist && tshy"
 	},
 	"files": [
 		"dist",
@@ -47,13 +45,61 @@
 		"fetch-to-curl"
 	],
 	"devDependencies": {
+		"@arethetypeswrong/cli": "^0.16.2",
 		"@smeijer/eslint-config": "^1.1.0",
 		"@smeijer/tsconfig": "^1.0.0",
 		"@types/node": "^18.19.33",
 		"esbuild": "^0.18.11",
 		"globstar": "^1.0.0",
 		"rimraf": "^5.0.1",
+		"tshy": "^3.0.2",
 		"tsx": "^4.10.4",
 		"typescript": "^5.1.6"
-	}
+	},
+	"exports": {
+		".": {
+			"import": {
+				"types": "./dist/esm/index.d.ts",
+				"default": "./dist/esm/index.js"
+			},
+			"require": {
+				"types": "./dist/commonjs/index.d.ts",
+				"default": "./dist/commonjs/index.js"
+			}
+		},
+		"./headers": {
+			"import": {
+				"types": "./dist/esm/headers.d.ts",
+				"default": "./dist/esm/headers.js"
+			},
+			"require": {
+				"types": "./dist/commonjs/headers.d.ts",
+				"default": "./dist/commonjs/headers.js"
+			}
+		},
+		"./request": {
+			"import": {
+				"types": "./dist/esm/request.d.ts",
+				"default": "./dist/esm/request.js"
+			},
+			"require": {
+				"types": "./dist/commonjs/request.d.ts",
+				"default": "./dist/commonjs/request.js"
+			}
+		},
+		"./to-curl": {
+			"import": {
+				"types": "./dist/esm/to-curl.d.ts",
+				"default": "./dist/esm/to-curl.js"
+			},
+			"require": {
+				"types": "./dist/commonjs/to-curl.d.ts",
+				"default": "./dist/commonjs/to-curl.js"
+			}
+		},
+		"./package.json": "./package.json"
+	},
+	"main": "./dist/commonjs/index.js",
+	"types": "./dist/commonjs/index.d.ts",
+	"module": "./dist/esm/index.js"
 }
